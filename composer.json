@@ -1,0 +1,19 @@
+{
+  "name": "morningtrain/wp-logger",
+  "description": "Logger interface",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Martin Schadegg Brønniche",
+      "email": "ms@morningtrain.dk"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Morningtrain\\WP\\Logger\\": "src/"
+    }
+  },
+  "require": {
+    "psr/log": "^3.0"
+  }
+}
