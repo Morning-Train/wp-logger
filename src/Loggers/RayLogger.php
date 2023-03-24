@@ -4,27 +4,32 @@ namespace Morningtrain\WP\Logger\Loggers;
 
 use Morningtrain\WP\Logger\Abstracts\AbstractLeveledLogger;
 
-class RayLogger extends AbstractLeveledLogger {
-
-    public function __construct()
+class RayLogger extends AbstractLeveledLogger
+{
+    public function __construct(private bool $backtrace = false)
     {
-        if(!function_exists('ray')) {
+    }
+
+    public function log($level, $message, array $context = []): void
+    {
+        if (! function_exists('ray')) {
             return;
         }
 
         ray()->separator();
-    }
 
-    public function log($level, \Stringable|string $message, array $context = []): void
-    {
-        if(!function_exists('ray')) {
-            return;
+        $values = ['Message' => $message];
+
+        if (! empty($context)) {
+            $values['Context'] = $context;
         }
 
-        ray($message)->label($level);
+        ray()->table($values, "[{$level}]");
 
-        if(!empty($context)) {
-            ray()->table($context, "{$level} - context");
+        if ($this->backtrace) {
+            ray()->backtrace();
         }
+
+        ray()->separator();
     }
 }
