@@ -17,7 +17,7 @@ class FileLogger extends AbstractLeveledLogger
         $this->path .= date('m');
     }
 
-    public function log($level, \Stringable|string $message, array $context = []): void
+    public function log($level, $message, array $context = []): void
     {
         if (! file_exists($this->path)) {
             mkdir($this->path, 0777, true);
