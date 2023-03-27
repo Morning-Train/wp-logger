@@ -4,6 +4,7 @@ namespace Morningtrain\WP\Logger;
 
 use Morningtrain\WP\Logger\Classes\Log;
 use Morningtrain\WP\Logger\Loggers\FileLogger;
+use Morningtrain\WP\Logger\Loggers\MailLogger;
 use Morningtrain\WP\Logger\Loggers\RayLogger;
 use Psr\Log\LoggerInterface;
 
@@ -19,6 +20,11 @@ class Logger
     public static function fileLogger(string $path): FileLogger
     {
         return new FileLogger($path);
+    }
+
+    public static function mailLogger(string $mail): MailLogger
+    {
+        return new MailLogger($mail);
     }
 
     public static function rayLogger(bool $backtrace = false): RayLogger
