@@ -10,5 +10,5 @@ class DbLogger extends Model
 
     protected $guarded = [];
 
-    public $timestamps = true;
+    public $timestamps = false;
 }
