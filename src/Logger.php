@@ -2,6 +2,7 @@
 
 namespace Morningtrain\WP\Logger;
 
+use Morningtrain\WP\Database\Database;
 use Morningtrain\WP\Database\Eloquent\Application;
 use Morningtrain\WP\Logger\Classes\Log;
 use Morningtrain\WP\Logger\Loggers\DbLogger;
@@ -14,6 +15,12 @@ class Logger
 {
     public static array $loggers = [];
     private static bool $databaseInitialized = false;
+
+    public static function initializeMigration(): void
+    {
+        Database::setup(dirname(__DIR__) . '/database/migrations');
+        Database::migrate();
+    }
 
     public static function log(): Log
     {
