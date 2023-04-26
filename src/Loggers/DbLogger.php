@@ -16,7 +16,7 @@ class DbLogger extends AbstractLeveledLogger
     {
         // Remove first two backtraces, so it's the correct spot that where the logger was called
         $debugBacktrace = debug_backtrace();
-        $debugBacktrace = array_splice($debugBacktrace, 2);
+        $debugBacktrace = array_splice($debugBacktrace, 2, 10);
 
         DbLoggerModel::query()
             ->insert([
