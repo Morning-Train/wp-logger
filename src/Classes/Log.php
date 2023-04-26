@@ -153,13 +153,13 @@ class Log extends AbstractLogger
     {
         return array_filter(
             $this->loggers, function ($logger) use ($level) {
-            // If the logger does not have info about which levels it should apply to, then we just use it
-            if (!method_exists($logger, 'shallApplyOnLevel')) {
-                return true;
-            }
+                // If the logger does not have info about which levels it should apply to, then we just use it
+                if (!method_exists($logger, 'shallApplyOnLevel')) {
+                    return true;
+                }
 
-            return $logger->shallApplyOnLevel($level);
-        }
+                return $logger->shallApplyOnLevel($level);
+            }
         );
     }
 }

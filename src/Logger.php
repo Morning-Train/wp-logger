@@ -2,7 +2,9 @@
 
 namespace Morningtrain\WP\Logger;
 
+use Morningtrain\WP\Database\Eloquent\Application;
 use Morningtrain\WP\Logger\Classes\Log;
+use Morningtrain\WP\Logger\Loggers\DbLogger;
 use Morningtrain\WP\Logger\Loggers\FileLogger;
 use Morningtrain\WP\Logger\Loggers\MailLogger;
 use Morningtrain\WP\Logger\Loggers\RayLogger;
@@ -11,10 +13,22 @@ use Psr\Log\LoggerInterface;
 class Logger
 {
     public static array $loggers = [];
+    private static bool $databaseInitialized = false;
 
     public static function log(): Log
     {
         return new Log(static::$loggers);
+    }
+
+    public static function dbLogger(): DbLogger
+    {
+        if (! static::$databaseInitialized) {
+            Application::setup();
+
+            static::$databaseInitialized = true;
+        }
+
+        return new DbLogger();
     }
 
     public static function fileLogger(string $path): FileLogger
