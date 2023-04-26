@@ -36,9 +36,9 @@ class Logger
         return new FileLogger($path);
     }
 
-    public static function mailLogger(string $mail): MailLogger
+    public static function mailLogger(array $emails): MailLogger
     {
-        return new MailLogger($mail);
+        return new MailLogger($emails);
     }
 
     public static function rayLogger(bool $backtrace = false): RayLogger
