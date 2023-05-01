@@ -12,8 +12,10 @@ class FileLogger extends AbstractLeveledLogger
 
     public function log($level, $message, array $context = []): void
     {
-        if (! file_exists($this->filename)) {
-            mkdir($this->filename, 0660, true);
+        $parentPath = dirname($this->filename);
+
+        if (! is_dir($parentPath)) {
+            mkdir($parentPath, 0660, true);
         }
 
         $logContent = '[DateTime]: ';
