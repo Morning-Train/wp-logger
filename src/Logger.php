@@ -22,11 +22,6 @@ class Logger
         Database::migrate();
     }
 
-    public static function log(): Log
-    {
-        return new Log(static::$loggers);
-    }
-
     public static function dbLogger(): DbLogger
     {
         if (! static::$databaseInitialized) {
@@ -53,15 +48,26 @@ class Logger
         return new RayLogger($backtrace);
     }
 
-    public static function registerLoggers(array $loggers): void
+    public static function registerLoggers(string $slug, array $loggersHandlers): void
     {
-        foreach ($loggers as $logger) {
-            static::registerLogger($logger);
+        if (! empty(static::$loggers[$slug])) {
+            $loggersHandlers = array_merge(static::$loggers[$slug], $loggersHandlers);
         }
+
+        static::$loggers[$slug] = new Log($loggersHandlers);
     }
 
-    public static function registerLogger(LoggerInterface $logger): void
+    public static function registerLogger(string $slug, LoggerInterface $loggerHandler): void
     {
-        static::$loggers[] = $logger;
+        static::registerLoggers($slug, [$loggerHandler]);
+    }
+
+    public static function getLogger(string $slug): ?Log
+    {
+        if (empty(static::$loggers[$slug])) {
+            return null;
+        }
+
+        return static::$loggers[$slug];
     }
 }
