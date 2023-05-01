@@ -19,7 +19,7 @@
 
 ## Introduction
 
-🚧
+Make it easier to handle different levels of log.
 
 
 ## Getting Started
@@ -47,11 +47,94 @@ composer require morningtrain/wp-logger
 
 ### Initializing package
 
-🚧
+Initialize `\Morningtrain\WP\Logger\Logger` with a slug and an array of the loggers that needs to be registered.  
+For each logger, there is some levels, that can be registered for the specific logger.
+
+```php
+\Morningtrain\WP\Logger\Logger::registerLoggers(
+    'logger', 
+    [
+        // Loggers
+    ]
+);
+```
+
+#### Loggers
+Each logger has the following methods, to register what level(s) that is needed:  
+- `->registerLevel($level)`
+- `->registerLevels([$level])`
+- `->registerAllLevels()`
+
+##### _Database Logger_  
+Make it possible to save logs to the database.  
+Class: `\Morningtrain\WP\Logger\Loggers\DbLogger`
+
+```php
+\Morningtrain\WP\Logger\Logger::dbLogger()
+```
+
+##### _File Logger_  
+Make it possible to save logs to a file.  
+Class: `\Morningtrain\WP\Logger\Loggers\FileLogger`
+Parameters in callback:
+- `string $path // which folder the file should be saved`
+
+```php
+\Morningtrain\WP\Logger\Logger::fileLogger($path)
+```
+
+##### _Mail Logger_  
+Make it possible to send logs to multiple emails.  
+Class: `\Morningtrain\WP\Logger\Loggers\MailLogger`
+Parameters in callback:
+- `array $emails`
+
+```php
+\Morningtrain\WP\Logger\Logger::mailLogger($emails)
+```
+
+##### _Ray Logger_
+Make it possible to send logs to a Ray client.  
+Class: `\Morningtrain\WP\Logger\Loggers\RayLogger`
+Parameters in callback:
+- `bool $backtrace // Optional. If true, it will add backtrace`
+
+```php
+\Morningtrain\WP\Logger\Logger::rayLogger()
+```
+
+#### Levels
+```php
+\Psr\Log\LogLevel::EMERGENCY
+\Psr\Log\LogLevel::ALERT
+\Psr\Log\LogLevel::CRITICAL
+\Psr\Log\LogLevel::ERROR
+\Psr\Log\LogLevel::WARNING
+\Psr\Log\LogLevel::NOTICE
+\Psr\Log\LogLevel::INFO
+\Psr\Log\LogLevel::DEBUG
+```
 
 ### Use package
 
-🚧
+To get the Logger, that has been registered, the method `\Morningtrain\WP\Logger\Logger::getLogger($slug)`, where the slug is needed.  
+When the logger is collected, there is a method, for each level, that can be call:
+
+```php
+\Morningtrain\WP\Logger\Logger::getLogger('logger')
+    ->emergency()
+    ->alert()
+    ->critical()
+    ->error()
+    ->warning()
+    ->notice()
+    ->info()
+    ->debug()
+```
+
+Each of these methods that:
+- `string $message`
+- `array $context // Optional`
 
 
 ## Contributing
@@ -82,7 +165,7 @@ We do not provide support for this package.
 
 ## Contributors
 
-- [Martin](#)
+- [Martin Schadegg Brønniche](https://github.com/mschadegg)
 - [Mathias Bærentsen](https://github.com/matbaek)
 - [All Contributors](../../contributors)
 
