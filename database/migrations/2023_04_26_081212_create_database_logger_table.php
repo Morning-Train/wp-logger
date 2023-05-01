@@ -13,6 +13,7 @@ return new class () extends Migration {
             $table->text('error_message');
             $table->text('error_context');
             $table->text('error_backtrace');
+            $table->string('error_file');
             $table->timestamps();
         });
     }
