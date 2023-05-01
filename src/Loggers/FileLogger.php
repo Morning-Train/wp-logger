@@ -6,21 +6,14 @@ use Morningtrain\WP\Logger\Abstracts\AbstractLeveledLogger;
 
 class FileLogger extends AbstractLeveledLogger
 {
-    private string $path;
-
-    public function __construct(
-        string $path
-    )
+    public function __construct(private string $filename)
     {
-        $this->path = rtrim($path, '/\\') . '/';
-        $this->path .= date('Y') . '/';
-        $this->path .= date('m');
     }
 
     public function log($level, $message, array $context = []): void
     {
-        if (! file_exists($this->path)) {
-            mkdir($this->path, 0777, true);
+        if (! file_exists($this->filename)) {
+            mkdir($this->filename, 0777, true);
         }
 
         $logContent = '[DateTime]: ';
@@ -35,8 +28,6 @@ class FileLogger extends AbstractLeveledLogger
         $logContent .= print_r($context, true);
         $logContent .= PHP_EOL;
 
-        $filename = $this->path . '/' . date('d') . '.txt';
-
-        file_put_contents($filename, $logContent, FILE_APPEND);
+        file_put_contents($this->filename, $logContent, FILE_APPEND);
     }
 }
