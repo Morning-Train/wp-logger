@@ -14,8 +14,9 @@ class MailLogger extends AbstractLeveledLogger
     {
         wp_mail(
             $this->emails,
-            "There was an error - Error type: {$level}",
+            'Something has happened - ' . home_url(),
             print_r([
+                'Level' => $level,
                 'Message' => $message,
                 'Context' => $context,
             ], true),
