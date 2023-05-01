@@ -47,6 +47,12 @@ composer require morningtrain/wp-logger
 
 ### Initializing package
 
+First of all, to get `\Morningtrain\WP\Logger\Loggers\DatabaseLogger` to work, the migration needs to be run. This is done be running the following method:  
+
+```php
+\Morningtrain\WP\Logger\Logger::initializeMigration()
+```
+
 Initialize `\Morningtrain\WP\Logger\Logger` with a slug and an array of the loggers that needs to be registered.  
 For each logger, there is some levels, that can be registered for the specific logger.
 
