@@ -67,20 +67,20 @@ Each logger has the following methods, to register what level(s) that is needed:
 
 ##### _Database Logger_  
 Make it possible to save logs to the database.  
-Class: `\Morningtrain\WP\Logger\Loggers\DbLogger`
+Class: `\Morningtrain\WP\Logger\Loggers\DatabaseLogger`
 
 ```php
-\Morningtrain\WP\Logger\Logger::dbLogger()
+\Morningtrain\WP\Logger\Logger::databaseLogger()
 ```
 
 ##### _File Logger_  
 Make it possible to save logs to a file.  
 Class: `\Morningtrain\WP\Logger\Loggers\FileLogger`
 Parameters in callback:
-- `string $path // which folder the file should be saved`
+- `string $filename`
 
 ```php
-\Morningtrain\WP\Logger\Logger::fileLogger($path)
+\Morningtrain\WP\Logger\Logger::fileLogger($filename)
 ```
 
 ##### _Mail Logger_  
