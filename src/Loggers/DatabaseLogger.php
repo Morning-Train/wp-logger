@@ -2,11 +2,10 @@
 
 namespace Morningtrain\WP\Logger\Loggers;
 
-use Illuminate\Support\Facades\Date;
 use Morningtrain\WP\Logger\Abstracts\AbstractLeveledLogger;
-use Morningtrain\WP\Logger\Models\DbLogger as DbLoggerModel;
+use Morningtrain\WP\Logger\Models\DatabaseLogger as DatabaseLoggerModel;
 
-class DbLogger extends AbstractLeveledLogger
+class DatabaseLogger extends AbstractLeveledLogger
 {
     public function __construct()
     {
@@ -18,13 +17,13 @@ class DbLogger extends AbstractLeveledLogger
         $debugBacktrace = debug_backtrace();
         $debugBacktrace = array_splice($debugBacktrace, 2, 10);
 
-        DbLoggerModel::query()
+        DatabaseLoggerModel::query()
             ->insert([
                 'error_level' => $level,
                 'error_message' => $message,
                 'error_context' => json_encode($context),
                 'error_backtrace' => json_encode($debugBacktrace),
-                'created_at' => Date::now(),
+                'created_at' => current_time('mysql'),
             ]);
     }
 }

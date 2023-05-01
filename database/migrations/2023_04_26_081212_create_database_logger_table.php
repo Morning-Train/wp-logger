@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     public function up(): void
     {
-        Schema::create('db_logger', function (Blueprint $table) {
+        Schema::create('database_logger', function (Blueprint $table) {
             $table->id();
             $table->string('error_level');
             $table->text('error_message');
@@ -19,6 +19,6 @@ return new class () extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('db_logger');
+        Schema::dropIfExists('database_logger');
     }
 };

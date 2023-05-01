@@ -4,9 +4,9 @@ namespace Morningtrain\WP\Logger\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DbLogger extends Model
+class DatabaseLogger extends Model
 {
-    protected $table = 'db_logger';
+    protected $table = 'database_logger';
 
     protected $guarded = [];
 
