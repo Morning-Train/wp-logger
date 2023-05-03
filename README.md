@@ -1,6 +1,6 @@
-# [PACKAGE TITLE]
+# WP Logger
 
-🚧
+Make it easier to handle different levels of log.
 
 
 ## Table of Contents
