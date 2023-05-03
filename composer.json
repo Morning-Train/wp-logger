@@ -6,6 +6,10 @@
     {
       "name": "Martin Schadegg Brønniche",
       "email": "ms@morningtrain.dk"
+    },
+    {
+      "name": "Mathias Bærentsen",
+      "email": "matb@morningtrain.dk"
     }
   ],
   "autoload": {
@@ -14,6 +18,7 @@
     }
   },
   "require": {
-    "psr/log": "^3.0"
+    "psr/log": "^3.0",
+    "morningtrain/wp-database": "^0.2.1"
   }
 }

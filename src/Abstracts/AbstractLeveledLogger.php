@@ -6,18 +6,18 @@ use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
 use ReflectionClass;
 
-abstract class AbstractLeveledLogger extends AbstractLogger {
-
+abstract class AbstractLeveledLogger extends AbstractLogger
+{
     protected array $levels = [];
 
-    public function registerAllLevels() :static
+    public function registerAllLevels(): static
     {
         $logLevels = new ReflectionClass(LogLevel::class);
 
         return $this->registerLevels($logLevels->getConstants());
     }
 
-    public function registerLevels(array $levels) :static
+    public function registerLevels(array $levels): static
     {
         foreach ($levels as $level) {
             $this->registerLevel($level);
@@ -26,16 +26,15 @@ abstract class AbstractLeveledLogger extends AbstractLogger {
         return $this;
     }
 
-    public function registerLevel(string $level) :static
+    public function registerLevel(string $level): static
     {
         $this->levels[$level] = $level;
 
         return $this;
     }
 
-    public function shallApplyOnLevel(string $level) :bool
+    public function shallApplyOnLevel(string $level): bool
     {
         return isset($this->levels[$level]);
     }
-
 }
