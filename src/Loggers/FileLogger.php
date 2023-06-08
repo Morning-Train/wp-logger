@@ -20,10 +20,7 @@ class FileLogger extends AbstractLeveledLogger
 
         $date = current_datetime();
 
-        $logContent = "{$date->format('Y-m-d H:i:s P T')} - {$level}: ";
-        $logContent .= PHP_EOL;
-
-        $logContent .= "    [Message]: {$message}";
+        $logContent = "{$date->format('Y-m-d H:i:s P T')} - {$level}: {$message}";
         $logContent .= PHP_EOL;
 
         if(!empty($context)) {
