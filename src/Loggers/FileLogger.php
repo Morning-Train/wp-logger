@@ -24,9 +24,10 @@ class FileLogger extends AbstractLeveledLogger
         $logContent .= PHP_EOL;
 
         if(!empty($context)) {
-            $logContent .= '    [Context]: ';
+            $logContent .= '    Context:'; // Indent with 4 spaces
             $logContent .= PHP_EOL;
-            $logContent .= str_replace("\n", "\n    ", print_r($context, true));
+            $logContent .= '        '; // Indent with 8 spaces
+            $logContent .= str_replace("\n", "\n        ", print_r($context, true)); // Indent with 8 spaces
             $logContent .= PHP_EOL;
         }
 
