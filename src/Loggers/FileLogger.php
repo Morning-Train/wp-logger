@@ -25,6 +25,7 @@ class FileLogger extends AbstractLeveledLogger
 
         if(!empty($context)) {
             $logContent .= '    [Context]: ';
+            $logContent .= PHP_EOL;
             $logContent .= str_replace("\n", "\n    ", print_r($context, true));
             $logContent .= PHP_EOL;
         }
