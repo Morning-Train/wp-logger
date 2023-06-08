@@ -18,17 +18,17 @@ class FileLogger extends AbstractLeveledLogger
             mkdir($parentPath, 0660, true);
         }
 
-        $logContent = '[DateTime]: ';
-        $logContent .= date('Y-m-d H:i:s P T');
+        $date = current_datetime();
+
+        $logContent = "{$date->format('Y-m-d H:i:s P T')} - {$level}: {$message}";
         $logContent .= PHP_EOL;
 
-        $logContent .= '[Message]: ';
-        $logContent .= $message;
-        $logContent .= PHP_EOL;
-
-        $logContent .= '[Context]: ';
-        $logContent .= print_r($context, true);
-        $logContent .= PHP_EOL;
+        if(!empty($context)) {
+            $logContent .= '    [Context]: ';
+            $logContent .= PHP_EOL;
+            $logContent .= str_replace("\n", "\n    ", print_r($context, true));
+            $logContent .= PHP_EOL;
+        }
 
         file_put_contents($this->filename, $logContent, FILE_APPEND);
     }
